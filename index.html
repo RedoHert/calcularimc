@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f4f4f4;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+}
+
+div {
+    margin: 20px auto;
+    padding: 10px;
+    width: 80%;
+    max-width: 400px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+hr {
+    margin: 20px 0;
+    border: none;
+    border-top: 1px solid #ccc;
+}
+
+h4 {
+    margin-bottom: 5px;
+}
+
+span {
+    font-weight: bold;
+}
+
+</style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora IMC</title>
+</head>
+<body>
+    <h1>Calculadora IMC</h1>
+    <div>
+        <div class="idade">
+            <label>Idade</label>
+            <input type="number" id="idade" placeholder="Idade">
+        </div>
+        <div class="peso">
+            <label>Peso</label>
+            <input type="number" id="peso" placeholder="Peso">
+        </div>
+        <div class="altura">
+            <label>Altura (m)</label>
+            <input type="number" id="altura" placeholder="Altura">
+        </div>
+        <button onclick="calcularIMC()">Calcular</button>
+        <hr>
+        <h4>IMC: <span id="resultadoIMC"></span></h4>
+        <br>
+        <h4>Classificação: <span id="classificacao"></span></h4>
+       
+    </div>
+
+    <script>
+        function calcularIMC() {
+            var idade = parseInt(document.getElementById("idade").value);
+            var peso = parseFloat(document.getElementById("peso").value);
+            var altura = parseFloat(document.getElementById("altura").value);
+            
+            if (isNaN(idade) || isNaN(peso) || isNaN(altura)) {
+                alert("Por favor, preencha todos os campos corretamente.");
+                return;
+            }
+
+            var imc = peso / (altura * altura);
+            document.getElementById("resultadoIMC").innerText = imc.toFixed(2);
+
+            var classificacao = "";
+            if (imc < 18.5) {
+                classificacao = "Abaixo do peso";
+            } else if (imc >= 18.5 && imc < 25) {
+                classificacao = "Peso saudável";
+            } else if (imc >= 25 && imc < 30) {
+                classificacao = "Sobrepeso";
+            } else {
+                classificacao = "Obeso";
+            }
+            document.getElementById("classificacao").innerText = classificacao;
+        }
+    </script>
+</body>
+</html>
