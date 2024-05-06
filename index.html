@@ -1,75 +1,74 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<style>
-    body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background-color: #f4f4f4;
-    text-align: center;
-}
-
-h1 {
-    color: #333;
-}
-
-div {
-    margin: 20px auto;
-    padding: 10px;
-    width: 80%;
-    max-width: 400px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-input[type="number"] {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-}
-
-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-hr {
-    margin: 20px 0;
-    border: none;
-    border-top: 1px solid #ccc;
-}
-
-h4 {
-    margin-bottom: 5px;
-}
-
-span {
-    font-weight: bold;
-}
-
-</style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora IMC</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        div {
+            margin: 20px auto;
+            padding: 10px;
+            width: 80%;
+            max-width: 400px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        hr {
+            margin: 20px 0;
+            border: none;
+            border-top: 1px solid #ccc;
+        }
+
+        h4 {
+            margin-bottom: 5px;
+        }
+
+        span {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <h1>Calculadora IMC</h1>
@@ -91,7 +90,9 @@ span {
         <h4>IMC: <span id="resultadoIMC"></span></h4>
         <br>
         <h4>Classificação: <span id="classificacao"></span></h4>
-       
+        <br>
+        <h4>Peso necessário:</h4>
+        <span id="pesoNecessario"></span>
     </div>
 
     <script>
@@ -99,7 +100,7 @@ span {
             var idade = parseInt(document.getElementById("idade").value);
             var peso = parseFloat(document.getElementById("peso").value);
             var altura = parseFloat(document.getElementById("altura").value);
-            
+
             if (isNaN(idade) || isNaN(peso) || isNaN(altura)) {
                 alert("Por favor, preencha todos os campos corretamente.");
                 return;
@@ -111,12 +112,18 @@ span {
             var classificacao = "";
             if (imc < 18.5) {
                 classificacao = "Abaixo do peso";
+                var pesoIdeal = 18.5 * (altura * altura);
+                var pesoFaltando = pesoIdeal - peso;
+                document.getElementById("pesoNecessario").innerText = "Faltam " + pesoFaltando.toFixed(2) + " kg para atingir o peso saudável.";
             } else if (imc >= 18.5 && imc < 25) {
                 classificacao = "Peso saudável";
+                document.getElementById("pesoNecessario").innerText = "";
             } else if (imc >= 25 && imc < 30) {
                 classificacao = "Sobrepeso";
+                document.getElementById("pesoNecessario").innerText = "";
             } else {
                 classificacao = "Obeso";
+                document.getElementById("pesoNecessario").innerText = "";
             }
             document.getElementById("classificacao").innerText = classificacao;
         }
